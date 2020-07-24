@@ -1,8 +1,6 @@
 library(ggplot2)
 library(gridExtra)
 
-options(shiny.reactlog = TRUE)
-
 # Generate some random data, 3 rows, 4 columns, 10 cases per dataset
 df <- expand.grid(x=1:10,rowvar=1:3,colvar=1:4)
 df$y <- rnorm(nrow(df))
@@ -53,12 +51,9 @@ server <- function(input, output, session) {
   
   # Enlagrged chart =============================
   output$enlarged <- renderPlot({
-    rownr <- selectedRow()
-    colnr <- selectedCol()
-    doPlot(row=rownr,colnr)
+    doPlot(row=selectedRow(),col=selectedCol())
   },
   height=600
   )
-  
 }
 
