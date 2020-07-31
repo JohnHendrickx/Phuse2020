@@ -1,5 +1,4 @@
 library(ggplot2)
-library(gridExtra)
 
 # Generate some random data, 3 rows, 4 columns, 10 cases per dataset
 df <- expand.grid(x=1:10,rowvar=1:3,colvar=1:4)

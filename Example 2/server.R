@@ -1,14 +1,9 @@
 library(ggplot2)
 library(gridExtra)
 
-options(shiny.reactlog = TRUE)
-
 # Generate some random data, 10 repeats of x by y, indexed by rep
 df <- expand.grid(x=1:10,reps=1:12)
 df$y <- rnorm(nrow(df))
-
-# Number of columns to use
-numCols <- 4
 
 doPlot <- function(forValue) {
   ggplot(df[df$reps==forValue,], aes(y = y,x=x)) +
@@ -19,7 +14,6 @@ doPlot <- function(forValue) {
     theme_bw(base_size = 18) +
     theme(aspect.ratio = 9/16)
 }
-
 
 server <- function(input, output, session) {
 # Initialize ---------------------------------------------------------
@@ -39,7 +33,6 @@ server <- function(input, output, session) {
     }
   })
   
-  
   # Overview chart =============================
   output$overview <- renderPlot({
     a <- lapply(unique(df$reps),function(val) {return(doPlot(forValue = val))})
@@ -54,6 +47,5 @@ server <- function(input, output, session) {
   },
   height=600
   )
-  
 }
 
